@@ -6,7 +6,7 @@ from django.db import models
 class Assets(models.Model):
     id_asset = models.AutoField(primary_key=True)
     modelo=models.CharField(max_length=30)
-    serie=models.CharField(max_length=30)
+    serie=models.CharField(max_length=30, unique = True)
     marca=models.CharField(max_length=30)
     cantidad=models.CharField(max_length=3)
     tipo=models.CharField(max_length=10)

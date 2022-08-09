@@ -7,7 +7,6 @@ from proyectoinventario.models import Assets, Clientes
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-
 class FormAssets(forms.ModelForm):
     modelo = forms.CharField(
         required=True,
