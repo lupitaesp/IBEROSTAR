@@ -89,8 +89,12 @@ class FormAssetsView(HttpRequest):
         assets = FormAssets(request.POST)
         if assets.is_valid():
             assets.save()
-            assets = FormAssets()
-        return render(request, "proyectowebapp/assetsindex.html", {"form": assets, "mensaje": 'OK'})
+            messages.error(request, "¡Asset registrado correctamente!")
+        else:
+            messages.error(request, "¡ERROR!")
+            return render(request, "proyectowebapp/assetsindex.html", {"form": assets, "mensa": 'OK'})
+        bode = Assets.objects.all().filter(accion=1)
+        return render(request, "proyectowebapp/bodega.html", {"bode": bode, "mensa": 'OK'})
 
 
 class FormAssetsSalidas(HttpRequest):

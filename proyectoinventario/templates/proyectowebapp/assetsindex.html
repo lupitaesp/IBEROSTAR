@@ -93,30 +93,30 @@
     <!-- End of Sidebar -->
     {% block content %}
     {% load crispy_forms_tags %}
+  
 
 
 
     <div class="container">
-      {% if form.errors %}
-      <div class="alert alert-danger" role="alert">
-        Este es un mensaje de alerta!
-      </div>
-      {% endif%}
-
       <form action="{% url 'guardarAsset' %}" method="POST">
-
-        <h4>Registro de Assets</h4>
         {% csrf_token %}
-        {% if mensaje %}
-        <div class="alert alert-success" role="alert">
-          Asset registrado existosamente
-        </div>
-        {% endif %}
+        <h4>Registro de Assets</h4>
         {{ form | crispy }}
         <div class="col">
           <button type="submit" class="btn btn-primary center-block">Guardar</button>
           <a href="{% url 'Bodega' %}"><button type="button" class="btn btn-danger">Cancelar</button></a>
         </div>
+        {% if messages %}
+        {% for mensa in messages %}
+        <script>
+          Swal.fire({
+            "title": "Accion Realizada",
+            "text": "{{mensa}}",
+            "icon": "success"
+          })  
+        </script>
+        {% endfor%}
+        {% endif %}
       </form>
     </div>
   </div>
