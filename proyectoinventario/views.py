@@ -74,6 +74,9 @@ def actualizarAsset(request, id_asset):
     if form.is_valid():
         form.save()
         messages.error(request, "¡Asset actualizado correctamente!")
+    else:
+        messages.error(request, "¡ERROR!")
+        return render(request, "proyectowebapp/assetsindex.html", {"form": form, "mensa": 'OK'})
     bode = Assets.objects.all().filter(accion=1)
     return render(request, "proyectowebapp/bodega.html", {"bode": bode, "mensa": 'OK'})
 
