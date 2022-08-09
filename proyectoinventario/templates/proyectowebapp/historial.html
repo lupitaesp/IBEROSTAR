@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>IBEROSTAR</title>
+  <link rel="icon" href="{% static 'proyectowebapp/img/icon.png'%}">
+
+  <!-- Custom fonts for this template-->
+  <link rel="icon" href="{% static 'imagenes/icon.png' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
+    type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  <!-- Custom styles for this template-->
+  <link href="{%  static 'proyectowebapp/css/home.css' %}" rel="stylesheet">
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <hr class="divider my-2">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon">
+          <i class="fas"></i>
+          <img src="{% static 'proyectowebapp/img/logo.png' %}" style="width:100%">
+        </div>
+
+      </a>
+
+      <!-- Divider -->
+      <hr class="divider my-3">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-text mx-3">GESTION INVENTARIO</div>
+      </a>
+
+      <hr class="sidebar-divider my-0">
+      <!-- BARRA DE MENU -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-user"></i>
+          <span>{{ user.username }}</span></a>
+      </li>
+
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Home' %}">
+          <i class="fas fa-fw fa-desktop"></i>
+          <span>ASSETS</span></a>
+      </li>
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Bodega' %}">
+          <i class="fas fa-fw fa-archive"></i>
+          <span>BODEGA</span></a>
+      </li>
+
+
+      <!-- CERRAR SESION -->
+      <li class="nav-item active">
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'cerrar_sesion' %}">
+          {% else %}
+          No autenticado
+          {% endif %}
+          <i class="fas fa-fw fa-sign-out-alt"></i>
+          <span>LOGOUT</span></a>
+      </li>
+    </ul>
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="display" id="example" width="100%">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Departamento</th>
+                <th>Hotel</th>
+                <th>Fecha</th>
+                <th>Descripcion</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p in cli %}
+              <tr>
+                <td>{{p.nombre}}</td>
+                <td>{{p.email}}</td>
+                <td>{{p.departamento}}</td>
+                <td>{{p.hotel}}</td>
+                <td>{{p.upated}}</td>
+                <td>{{p.descripcion}}</td>
+                <td><a href="{% url 'editarUsuario' p.id  %}" class="btn btn-warning btn-circle" title="Editar"><i class="fas fa-edit"></i>
+                </td>
+              </tr>
+              {% endfor %}
+          </table>
+          <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+          <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <!-- HACER IF PARA QUE MUESTRE DIFERENTES MENSAJES  -->
+
+          <script>
+            $(document).ready(function () {
+              $('#example').DataTable();
+            });
+          </script>
+
+
+        </div>
+
+      </div>
+</body>
+
+</html>

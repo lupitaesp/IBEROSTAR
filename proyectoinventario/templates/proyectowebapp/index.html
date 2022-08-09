@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title> IBEROSTAR </title>
+  
+  <link type="text/css" href="{% static 'proyectowebapp/css/index.css'%}" rel="stylesheet">
+  </link>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <link rel="icon" href="{% static 'proyectowebapp/img/icon.png'%}">
+</head>
+
+<body>
+  <div id="login-button">
+    <img src="https://dqcgrsy5v35b9.cloudfront.net/cruiseplanner/assets/img/icons/login-w-icon.png">
+    </img>
+  </div>
+  <div id="container">
+    </br>
+    <h1>Log In</h1>
+    </br>
+    {% load crispy_forms_tags %}
+    {% block content %}
+    <form method="post" action="" style="color: white;">
+      {% csrf_token %}
+      <!-- MENSAJES DE ERROR EN EL LOGIN -->
+      {% if messages %}
+      {% for mensaje in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{mensaje}}
+      </div>
+  {% endfor%}
+  {% endif %}
+  {{form|crispy}}
+  <button type="submit">ENTRAR</button>
+
+  </form>
+  {% endblock %}
+  </div>
+  <script type="text/javascript" src="{% static 'proyectowebapp/js/index.js'%}"></script>
+</body>
+<div id="container">
+</div>
+
+</html>

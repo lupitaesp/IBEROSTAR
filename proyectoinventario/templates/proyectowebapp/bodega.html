@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>IBEROSTAR</title>
+  <link rel="icon" href="{% static 'proyectowebapp/img/icon.png'%}">
+
+  <!-- Custom fonts for this template-->
+  <link rel="icon" href="{% static 'imagenes/icon.png' %}">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet"
+    type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  <!-- Custom styles for this template-->
+  <link href="{%  static 'proyectowebapp/css/home.css' %}" rel="stylesheet">
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+      <!-- Sidebar - Brand -->
+      <hr class="divider my-2">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon">
+          <i class="fas"></i>
+          <img src="{% static 'proyectowebapp/img/logo.png' %}" style="width:100%">
+        </div>
+
+      </a>
+
+      <!-- Divider -->
+      <hr class="divider my-3">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-text mx-3">GESTION INVENTARIO</div>
+      </a>
+
+      <hr class="sidebar-divider my-0">
+      <!-- BARRA DE MENU -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-fw fa-user"></i>
+          <span>{{ user.username }}</span></a>
+      </li>
+
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Home' %}">
+          <i class="fas fa-fw fa-desktop"></i>
+          <span>ASSETS</span></a>
+      </li>
+
+
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Bodega' %}">
+          <i class="fas fa-fw fa-archive"></i>
+          <span>BODEGA</span></a>
+      </li>
+
+
+      <!-- CERRAR SESION -->
+      <li class="nav-item active">
+        {% if user.is_authenticated %}
+        <a class="nav-link" href="{% url 'cerrar_sesion' %}">
+          {% else %}
+          No autenticado
+          {% endif %}
+          <i class="fas fa-fw fa-sign-out-alt"></i>
+          <span>LOGOUT</span></a>
+      </li>
+    </ul>
+
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <!-- REGISTRO DE DISPOSITIVOS -->
+      </br>
+      </br>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">REGISTRO DE ASSETS</h6>
+          <a href="{% url 'registrarAsset' %}"><button type="button" class="btn btn-primary">AGREGAR</button></a>
+
+        </div>
+
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          {% block js %}
+          <script>
+            function eliminarAsset(id) {
+              Swal.fire({
+                "title": "¿Estas seguro?",
+                "text": "Esta accion no se puede desahacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "confirmButtonColor": "red",
+                "cancelButtonColor": "blue"
+              })
+                .then(function (result) {
+                  if (result.isConfirmed) {
+                    window.location.href = "/eliminarAsset/" + id
+                  }
+                })
+
+            }
+          </script>
+
+          {% endblock %}
+          <table class="display" id="example" width="100%">
+            <thead>
+              <tr>
+                <th>Tipo</th>
+                <th>Modelo</th>
+                <th>Serie</th>
+                <th>Marca</th>
+                <th>Categoria</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Año de Compra</th>
+                <th>Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in bode %}
+              <tr>
+                <td>{{c.tipo}}</td>
+                <td>{{c.modelo}}</td>
+                <td>{{c.serie}}</td>
+                <td>{{c.marca}}</td>
+                <td>{{c.categoria}}</td>
+                <td>{{c.estado}}</td>
+                <td>{{c.fecha}}</td>
+                <td>{{c.cantidad}}</td>
+                <td>{{c.fecha_compra}}</td>
+                <td>
+                  <a href="{% url 'registrarSalida' c.id_asset  %}" class="btn btn-success btn-circle" title="Asignar"><i class="fas fa-user"></i></a>
+                  <a href="{% url 'editarAsset' c.id_asset  %}" class="btn btn-warning btn-circle"><i class="fas fa-edit"
+                      title="Editar"></i></a>
+                  <button onclick="eliminarAsset({{c.id_asset}})" class="btn btn-danger btn-circle"><i
+                      class="fas fa-trash-alt" title="Eliminar"></i></button>
+                </td>
+              </tr>
+              {% endfor %}
+          </table>
+          <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+          <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <!-- HACER IF PARA QUE MUESTRE DIFERENTES MENSAJES  -->
+          {% if messages %}
+          {% for mensa in messages %}
+          <script>
+            Swal.fire({
+              "title": "Accion Realizada",
+              "text": "{{mensa}}",
+              "icon": "success"
+            })  
+          </script>
+          {% endfor%}
+          {% endif %}
+          <script>
+            $(document).ready(function () {
+              $('#example').DataTable();
+            });
+          </script>
+
+
+        </div>
+
+      </div>
+</body>
+
+</html>
