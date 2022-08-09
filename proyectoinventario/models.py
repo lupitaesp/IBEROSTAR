@@ -8,7 +8,6 @@ class Assets(models.Model):
     modelo=models.CharField(max_length=30)
     serie=models.CharField(max_length=30, unique = True)
     marca=models.CharField(max_length=30)
-    cantidad=models.CharField(max_length=3)
     tipo=models.CharField(max_length=10)
     categoria=models.CharField(max_length=10)
     estado=models.CharField(max_length=10)

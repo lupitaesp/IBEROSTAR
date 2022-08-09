@@ -21,9 +21,6 @@ class FormAssets(forms.ModelForm):
         widget=DateInput
     )
 
-    cantidad = forms.IntegerField(
-        required=True,
-    )
     tipo = forms.CharField(
         required=True,
     )
@@ -47,7 +44,7 @@ class FormAssets(forms.ModelForm):
 
     class Meta:
         model = Assets
-        fields = ['modelo', 'serie', 'marca', 'cantidad',
+        fields = ['modelo', 'serie', 'marca',
                   'fecha_compra', 'tipo', 'categoria', 'estado', 'accion']
         wigets = {'fecha': forms.DateTimeInput(
             format='%d/%m/%Y', attrs={'type': 'datetime'})}

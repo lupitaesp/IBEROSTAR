@@ -111,7 +111,6 @@
                 <th>Categoria</th>
                 <th>Estado</th>
                 <th>Fecha</th>
-                <th>Cantidad</th>
                 <th>Año de Compra</th>
                 <th>Accion</th>
                 <!-- FALTA ACCION DE REGRESAR A LA BODEGA -->
@@ -127,7 +126,6 @@
                 <td>{{c.categoria}}</td>
                 <td>{{c.estado}}</td>
                 <td>{{c.fecha}}</td>
-                <td>{{c.cantidad}}</td>
                 <td>{{c.fecha_compra}}</td>
                 <td>
                   <a href="{% url 'registrarSalida' c.id_asset  %}" class="btn btn-success btn-circle" title="Asignar"><i class="fas fa-user"></i></a>

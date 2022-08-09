@@ -105,7 +105,7 @@ class FormAssetsSalidas(HttpRequest):
 
     def registrarSalida(request, id_asset):
         # PASAMOS POR METODO POST EL ID PARA ALMACENARLO EN UNA VARIABLE
-        dispo = Assets.objects.filter(id_asset=id_asset).first()
+        dispo = Assets.objects.get(id_asset=id_asset) 
         form = FormSalidas(instance=dispo)
         return render(request, "proyectowebapp/assetSalidaForm.html", {"form": form, 'dispo': dispo})
     # Guardar el formulario
