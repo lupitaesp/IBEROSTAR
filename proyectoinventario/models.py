@@ -1,4 +1,5 @@
 from tabnanny import verbose
+from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -29,6 +30,6 @@ class Clientes(models.Model):
 
 class Ip(models.Model):
     id=models.AutoField(primary_key=True)
-    ip=models.CharField(max_length=12, unique=True)
-    equipo= models.CharField(max_length=20,unique=True)
+    ip=models.CharField(max_length=12, unique= False)
+    equipo= models.CharField(max_length=20)
     cliente=models.CharField(max_length=30)

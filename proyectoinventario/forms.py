@@ -87,9 +87,15 @@ class FormIp(forms.ModelForm):
     ip=forms.CharField(
         required=True
     )
-    equipo=forms.CharField( required=False)
-    cliente=forms.CharField(required=False)
+
+    equipo=forms.CharField(
+        required=False
+    )
+    cliente=forms.CharField(
+        required=False
+    )
 
     class Meta:
         model = Ip
         fields = ['ip','equipo','cliente']
+

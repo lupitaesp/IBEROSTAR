@@ -50,7 +50,7 @@ def bodega(request):
 
 def equipo(request):
     bode = Ip.objects.all()
-    return render(request, "proyectowebapp/equipos.html", {'bode': bode})
+    return render(request, "proyectowebapp/equipos.html", {'bode': bode, })
 
 def cerrar_sesion(request):
     logout(request)
@@ -156,9 +156,29 @@ class FormAssetsIp(HttpRequest):
         equipos = FormIp(request.POST)
         if equipos.is_valid():
             equipos.save()
-            messages.error(request, "¡Asset registrado correctamente!")
+            messages.error(request, "¡IP registrada!")
         else:
             messages.error(request, "¡ERROR!")
             return render(request, "proyectowebapp/form_ip.html", {"form": equipos, "mensa": 'OK'})
         bode = Ip.objects.all()
-        return render(request, "proyectowebapp/equipo.html", {"bode": bode, "mensa": 'OK'})
+        return render(request, "proyectowebapp/equipos.html", {"bode": bode, "mensa": 'OK'})
+
+
+def editarEquipo(request, id):
+    bodes = Ip.objects.filter(id=id).first()
+    form = FormIp(instance=bodes)
+    return render(request, "proyectowebapp/asignarEquipo.html", {"form": form, 'bodes': bodes})
+
+
+def asignarEquipo(request, id):
+    bodes = Ip.objects.get(id=id)
+    form = FormIp(request.POST, instance=bodes)
+    if form.is_valid():
+        form.save()
+        messages.error(request, "¡Nombre de Equipo Asignado!")
+    else:
+        messages.error(request, "¡ERROR!")
+        return render(request, "proyectowebapp/asignarEquipo.html", {"form": form, "mensa": 'OK'})
+    bode = Ip.objects.all()
+    return render(request, "proyectowebapp/equipos.html", {"bode": bode, "mensa": 'OK'})
+

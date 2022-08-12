@@ -13,6 +13,8 @@ urlpatterns = [
     path('registrarIp/', views.FormAssetsIp.registroip, name='registrarIp'),
     path('guardarIp/', views.FormAssetsIp.guardarip, name='guardarIp'),
     path('Equipos', views.equipo, name='Equipo'),
+    path('editarEquipo/<int:id>',  views.editarEquipo, name='editarEquipo'),
+    path('asignarEquipo/<int:id>',  views.asignarEquipo, name='asignarEquipo'),
 
    # path('dispositivos',views.dispositivos,name="Dispositivos"),
     path('registrarAsset/', views.FormAssetsView.inde, name='registrarAsset'),
