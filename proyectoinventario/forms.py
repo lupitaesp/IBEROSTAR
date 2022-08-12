@@ -1,7 +1,8 @@
 from dataclasses import fields
 from pyexpat import model
+from telnetlib import IP
 from django import forms
-from proyectoinventario.models import Assets, Clientes
+from proyectoinventario.models import Assets, Clientes, Ip
 
 
 class DateInput(forms.DateInput):
@@ -81,3 +82,14 @@ class FormSalidas(forms.ModelForm):
                   'hotel', 'descripcion', 'estado']
         wigets = {'update': forms.DateTimeInput(
             format='%d/%m/%Y', attrs={'type': 'datetime'})}
+
+class FormIp(forms.ModelForm):
+    ip=forms.CharField(
+        required=True
+    )
+    equipo=forms.CharField( required=False)
+    cliente=forms.CharField(required=False)
+
+    class Meta:
+        model = Ip
+        fields = ['ip','equipo','cliente']

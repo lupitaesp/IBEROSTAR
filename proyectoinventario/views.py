@@ -1,11 +1,11 @@
 from xml.dom import INVALID_STATE_ERR
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from proyectoinventario.forms import FormAssets, FormSalidas
+from proyectoinventario.forms import FormAssets, FormIp, FormSalidas
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from proyectoinventario.models import Assets, Clientes
+from proyectoinventario.models import Assets, Clientes, Ip
 
 
 def logi(request):
@@ -48,6 +48,9 @@ def bodega(request):
     bode = Assets.objects.all().filter(accion=1)
     return render(request, "proyectowebapp/bodega.html", {'bode': bode})
 
+def equipo(request):
+    bode = Ip.objects.all()
+    return render(request, "proyectowebapp/equipos.html", {'bode': bode})
 
 def cerrar_sesion(request):
     logout(request)
@@ -141,3 +144,21 @@ def actualizarUsuario(request, id_asset):
         messages.error(request, "¡Usuario actualizado correctamente!")
     bode = Assets.objects.all().filter(accion=0)
     return render(request, "proyectowebapp/home.html", {'bode': bode, 'mensaje': "OK"})
+
+class FormAssetsIp(HttpRequest):
+
+    def registroip(request):
+        equipos = FormIp()
+        return render(request, "proyectowebapp/form_ip.html", {"form": equipos})
+# Guardar el formulario
+
+    def guardarip(request):
+        equipos = FormIp(request.POST)
+        if equipos.is_valid():
+            equipos.save()
+            messages.error(request, "¡Asset registrado correctamente!")
+        else:
+            messages.error(request, "¡ERROR!")
+            return render(request, "proyectowebapp/form_ip.html", {"form": equipos, "mensa": 'OK'})
+        bode = Ip.objects.all()
+        return render(request, "proyectowebapp/equipo.html", {"bode": bode, "mensa": 'OK'})

@@ -10,6 +10,9 @@ urlpatterns = [
     path('home',views.home,name="Home"),
     path('bodega',views.bodega,name="Bodega"),
     path('historial/<int:id_asset>',views.historial,name="Historial"),
+    path('registrarIp/', views.FormAssetsIp.registroip, name='registrarIp'),
+    path('guardarIp/', views.FormAssetsIp.guardarip, name='guardarIp'),
+    path('Equipos', views.equipo, name='Equipo'),
 
    # path('dispositivos',views.dispositivos,name="Dispositivos"),
     path('registrarAsset/', views.FormAssetsView.inde, name='registrarAsset'),

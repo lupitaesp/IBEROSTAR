@@ -71,6 +71,11 @@
           <i class="fas fa-fw fa-archive"></i>
           <span>BODEGA</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'Equipo' %}">
+          <i class="fas fa-solid fa-download fa-fw"></i>
+          <span>DIRECCIONES IP</span></a>
+      </li>
 
 
       <!-- CERRAR SESION -->
@@ -134,12 +139,13 @@
                 <th>Categoria</th>
                 <th>Estado</th>
                 <th>Fecha</th>
-                <th>Año de Compra</th>
+                <th>Fecha de Compra</th>
                 <th>Accion</th>
               </tr>
             </thead>
             <tbody>
               {% for c in bode %}
+                
               <tr>
                 <td>{{c.tipo}}</td>
                 <td>{{c.modelo}}</td>

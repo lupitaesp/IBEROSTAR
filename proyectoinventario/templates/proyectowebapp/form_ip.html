@@ -104,13 +104,13 @@
 
 
     <div class="container">
-      <form action="{% url 'guardarAsset' %}" method="POST">
+      <form action="{% url 'guardarIp' %}" method="POST">
         {% csrf_token %}
-        <h4>Registro de Assets</h4>
+        <h4>Registro de IP'S</h4>
         {{ form | crispy }}
         <div class="col">
           <button type="submit" class="btn btn-primary center-block">Guardar</button>
-          <a href="{% url 'Bodega' %}"><button type="button" class="btn btn-danger">Cancelar</button></a>
+          <a href="{% url 'Equipo' %}"><button type="button" class="btn btn-danger">Cancelar</button></a>
         </div>
         {% if messages %}
         {% for mensa in messages %}
