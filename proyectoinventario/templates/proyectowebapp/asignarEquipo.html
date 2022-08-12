@@ -110,12 +110,11 @@
 
       <form action="{% url 'asignarEquipo' bodes.id %}" method="POST">
 
-        <h4>Asignar Equipo</h4>
+        <h4>Asignar Nombre de Equipo</h4>
         {% csrf_token %}
         {% if mensaje %}
         <div class="alert alert-success" role="alert">
-          Asset actualizado existosamente
-        </div>
+           Nombre de Equipo Asignado </div>
         {% endif %}
         {{ form | crispy }}
         <div class="col">

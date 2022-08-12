@@ -1,4 +1,5 @@
 from dataclasses import fields
+from enum import unique
 from pyexpat import model
 from telnetlib import IP
 from django import forms
@@ -85,7 +86,7 @@ class FormSalidas(forms.ModelForm):
 
 class FormIp(forms.ModelForm):
     ip=forms.CharField(
-        required=True
+        required=True,
     )
 
     equipo=forms.CharField(
@@ -99,3 +100,19 @@ class FormIp(forms.ModelForm):
         model = Ip
         fields = ['ip','equipo','cliente']
 
+class FormUpdateIp(forms.ModelForm):
+    ip=forms.CharField(
+        required=True,
+        disabled=True
+    )
+
+    equipo=forms.CharField(
+        required=False
+    )
+    cliente=forms.CharField(
+        required=False
+    )
+
+    class Meta:
+        model = Ip
+        fields = ['ip','equipo','cliente']

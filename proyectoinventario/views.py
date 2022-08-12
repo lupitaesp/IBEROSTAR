@@ -1,7 +1,7 @@
 from xml.dom import INVALID_STATE_ERR
 from django.http import HttpRequest
 from django.shortcuts import redirect, render
-from proyectoinventario.forms import FormAssets, FormIp, FormSalidas
+from proyectoinventario.forms import FormAssets, FormIp, FormSalidas, FormUpdateIp
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -166,13 +166,13 @@ class FormAssetsIp(HttpRequest):
 
 def editarEquipo(request, id):
     bodes = Ip.objects.filter(id=id).first()
-    form = FormIp(instance=bodes)
+    form = FormUpdateIp(instance=bodes)
     return render(request, "proyectowebapp/asignarEquipo.html", {"form": form, 'bodes': bodes})
 
 
 def asignarEquipo(request, id):
     bodes = Ip.objects.get(id=id)
-    form = FormIp(request.POST, instance=bodes)
+    form = FormUpdateIp(request.POST, instance=bodes)
     if form.is_valid():
         form.save()
         messages.error(request, "¡Nombre de Equipo Asignado!")
