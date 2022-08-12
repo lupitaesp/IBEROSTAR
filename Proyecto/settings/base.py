@@ -26,7 +26,7 @@ SECRET_KEY = '*gtxr@-9g2mkg@&29kytibv&xdw#5_55@xw@68#c9_nb21won#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'iberostar.herokuapp.com']
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Application definition
